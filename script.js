@@ -4,6 +4,9 @@ var columns = 3;
 var currTile;
 var otherTile;
 
+var selected = false;
+var board = [];
+
 var turns = 0;
 
 window.onload = function() {
@@ -12,8 +15,9 @@ window.onload = function() {
         for (let c = 0; c < columns; c++) {
             //<img>
             let tile = document.createElement("img");
-            tile.src = "./blank.jpg";
+            tile.src = "./images/blank.jpg";
 
+            tile.addEventListener("click", onClick)
             //DRAG FUNCTIONALITY
             tile.addEventListener("dragstart", dragStart); //click on image to drag
             tile.addEventListener("dragover", dragOver);   //drag an image
@@ -30,6 +34,7 @@ window.onload = function() {
     let pieces = [];
     for (let i=1; i <= rows*columns; i++) {
         pieces.push(i.toString()); //put "1" to "25" into the array (puzzle images names)
+        board.push("0");
     }
     pieces.reverse();
     for (let i =0; i < pieces.length; i++) {
@@ -43,8 +48,9 @@ window.onload = function() {
 
     for (let i = 0; i < pieces.length; i++) {
         let tile = document.createElement("img");
-        tile.src = "./" + pieces[i] + ".jpg";
+        tile.src = "./images/" + pieces[i] + ".jpg";
 
+        tile.addEventListener("click", onClick)
         //DRAG FUNCTIONALITY
         tile.addEventListener("dragstart", dragStart); //click on image to drag
         tile.addEventListener("dragover", dragOver);   //drag an image
@@ -55,6 +61,44 @@ window.onload = function() {
 
         document.getElementById("pieces").append(tile);
     }
+}
+
+function onClick() {
+    if (!selected) {
+        currTile = this;
+        selected = true;
+    } else {
+        otherTile = this;
+        if (currTile.src.includes("blank")) {
+            return;
+        }
+        let currImg = currTile.src;
+        let otherImg = otherTile.src;
+        currTile.src = otherImg;
+        otherTile.src = currImg;
+
+        turns += 1;
+        document.getElementById("turns").innerText = turns;
+        selected = false;
+        win = checkWin();
+        if (win) {
+            congratulations();
+        }
+    }
+}
+
+function checkWin() {
+    var correct = 0
+    for (let i=0; i < rows*columns; i++) {
+        if (board[i] == (i+1).toString()) {
+           correct++; 
+        }
+    }
+    return correct == (rows*columns);
+}
+
+function congratulations() {
+    console.log("hello");
 }
 
 //DRAG TILES
@@ -89,5 +133,9 @@ function dragEnd() {
 
     turns += 1;
     document.getElementById("turns").innerText = turns;
+    win = checkWin();
+    if (win) {
+        congratulations();
+    }
 }
 

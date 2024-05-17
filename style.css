@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
 
+:root {
+    --board: 93vw;
+    --piece: 30.8vw;
+}
 
 body {
     font-family: Arial, Helvetica, sans-serif;
@@ -20,8 +24,8 @@ h2 {
 }
 
 #board {
-    width: 400px;
-    height: 400px;
+    width: var(--board);
+    height: var(--board);
     border: 5px solid #5952b3;
 
     margin: 0 auto;
@@ -30,15 +34,15 @@ h2 {
 }
 
 #board img {
-    width: 132px;
-    height: 132px;
+    width: var(--piece);
+    height: var(--piece);
     border: 0.5px solid #5952b3;
 }
 
 
 #pieces {
-    width: 399px;
-    height: 399px;
+    width: var(--board);
+    height: var(--board);
     border: 5px solid #5952b3;
 
     margin: 0 auto;
@@ -47,7 +51,7 @@ h2 {
 }
 
 #pieces img {
-    width: 132px;
-    height: 132px;
+    width: var(--piece);
+    height: var(--piece);
     border: 0.5px solid #5952b3;
 }
