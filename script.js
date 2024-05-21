@@ -15,7 +15,7 @@ window.onload = function() {
         for (let c = 0; c < columns; c++) {
             //<img>
             let tile = document.createElement("img");
-            tile.src = "/blank.jpg";
+            tile.src = "./images/blank.jpg";
 
             tile.addEventListener("click", onClick)
             //DRAG FUNCTIONALITY
@@ -48,7 +48,7 @@ window.onload = function() {
 
     for (let i = 0; i < pieces.length; i++) {
         let tile = document.createElement("img");
-        tile.src = "/" + pieces[i] + ".jpg";
+        tile.src = "./images/" + pieces[i] + ".jpg";
 
         tile.addEventListener("click", onClick)
         //DRAG FUNCTIONALITY
@@ -69,7 +69,7 @@ function onClick() {
         selected = true;
     } else {
         otherTile = this;
-        if (currTile.src.includes("blank")) {
+        if (currTile.src.includes("blank") || otherTile == currTile) {
             return;
         }
         let currImg = currTile.src;
