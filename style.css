@@ -55,3 +55,11 @@ h2 {
     height: var(--piece);
     border: 0.5px solid #5952b3;
 }
+
+
+a {
+    margin-top: 30px;
+    color: white;
+    text-decoration: none;
+    height: 50px;
+}
